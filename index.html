@@ -242,9 +242,123 @@
       
         <p>记录了“计算方法”这门课的学习笔记。<br>说不准关于迭代的知识将来还用得上~</p>
 <hr>
-        
-          <a class="article-more-a" href="/2020/10/27/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/#more">more >></a>
-        
+<h3 id="有效数字："><a href="#有效数字：" class="headerlink" title="有效数字："></a>有效数字：</h3><p>近似值x，准确值x^*^</p>
+<p>绝对误差e = x^*^ - x</p>
+<p>绝对误差限ε： |e|$\le \epsilon$ </p>
+<p>相对误差e<del>r</del> = $\frac{e}{x^*}$</p>
+<p>相对误差限ε<del>r</del> = $\frac{\epsilon}{|x|}$</p>
+<p>相对误差 ε<del>r</del> 和有效数字 n 还有下述关系：</p>
+<p>$\varepsilon _r=\frac{1}{2x_1}\times 10^{1-n}$</p>
+<p>问近似值有多少位有效数字，则先将数字化为0.x<del>1</del>x<del>2</del>x<del>3</del>…*10^m^</p>
+<p>例如3.1415926 –&gt; 0.3415926*10^1^</p>
+<p>|x - x^<em>^| &lt; 0.5</em>10^m-n^</p>
+<p>n就是最后的有效位数</p>
+<p>例如，10.4200有6位有效数字，精确到小数点后第4位；10.42有4位有效数字，精确到小数点后第2位。</p>
+<hr>
+<h3 id="范数"><a href="#范数" class="headerlink" title="范数"></a>范数</h3><p>$\lVert x \rVert <em>1=\sum</em>{i=0}^n{\left| x_i \right|}$      向量元素绝对值之和</p>
+<p>$\lVert x \rVert <em>2=\sqrt{\sum</em>{i=0}^n{x_{i}^{2}}}$    向量平方和开方</p>
+<p>$\lVert x \rVert _{\infty}=\max \left| x_i \right|$       元素绝对值最大者</p>
+<p>以上为1、2、无穷范数。</p>
+<hr>
+<h4 id="秦九韶算法"><a href="#秦九韶算法" class="headerlink" title="秦九韶算法"></a>秦九韶算法</h4><p>$$<br>P_n\left( x \right) =a_nx^n+a_{n-1}x^{n-1}…+a_1x+a_0<br>$$</p>
+<p>$$<br>P_n\left( x \right) =\left( \left( \left( a_nx+a_{n-1} \right) x+a_{n-2} \right)x +…a_1 \right)x +a_0<br>$$</p>
+<p>将多项式转化为下面一行。</p>
+<hr>
+<h4 id="避免大数吃小数、相近数相减"><a href="#避免大数吃小数、相近数相减" class="headerlink" title="避免大数吃小数、相近数相减"></a>避免大数吃小数、相近数相减</h4><p>$$<br>\sqrt{x+\delta}-\sqrt{x}=\frac{\delta}{\sqrt{x+\delta}+\sqrt{x}}<br>$$</p>
+<p>$$<br>\ln \left( x+\varepsilon \right) -\ln x=\ln \left( 1+\frac{\varepsilon}{x} \right)<br>$$</p>
+<p>$$<br>\text{当}\left| x \right|&lt;&lt;1\text{时,}1-\cos \left( x \right) =2\sin ^2\left( \frac{x}{2} \right)<br>$$</p>
+<p>参考以上三条经验，避免发生大数吃小数，相近数相减的问题。</p>
+<hr>
+<h3 id="非线性方程求根："><a href="#非线性方程求根：" class="headerlink" title="==非线性方程求根：=="></a>==非线性方程求根：==</h3><h4 id="1、二分法"><a href="#1、二分法" class="headerlink" title="1、二分法"></a>1、二分法</h4><p>给定区间[a , b]，只需要<br>$$<br>k&gt;\frac{\ln \left( b-a \right) -\ln \left( 2\varepsilon \right)}{\ln 2}\text{，}\varepsilon \text{是要求的精度}<br>$$</p>
+<p>k次二分，就可以达到要求精度。</p>
+<p><u><strong>二分法的收敛阶是线性的</strong></u></p>
+<hr>
+<h4 id="2、迭代法"><a href="#2、迭代法" class="headerlink" title="2、迭代法"></a>2、迭代法</h4><p>给出f(x)=0，求在[a , b]上的解。(a , b可能需要自己设)</p>
+<p>1、f(a , b) &lt; 0，即方程在[a,b]上有根；</p>
+<p>2、将f(x)=0改写成<br>$$<br>x=\varphi \left( x \right)<br>$$<br>同时设<br>$$<br>x_{k+1}=\varphi \left( x_k \right)<br>$$<br>验证：①当x∈[a , b]时，a &lt; φ(x) &lt; b<br>            ②|φ′(x)<del>max</del>|&lt; L &lt; 1</p>
+<p>由①②可知φ(x)收敛于x^*^</p>
+<p>自行选择x<del>0</del>（初值），带入迭代公式开始计算。</p>
+<hr>
+<h4 id="3、Newton法"><a href="#3、Newton法" class="headerlink" title="3、Newton法"></a>3、Newton法</h4><p>给出f(x)=0，求在[a , b]上的解。(a , b可能需要自己设)<br>$$<br>x_{k+1}=x_k-\frac{f\left( x_k \right)}{f^{’}\left( x_k \right)}<br>$$<br>选取初值x<del>0</del>，直接迭代。</p>
+<p><u><strong>牛顿法是平方收敛的</strong></u></p>
+<hr>
+<h3 id="迭代过程的加速"><a href="#迭代过程的加速" class="headerlink" title="==迭代过程的加速=="></a><strong>==迭代过程的加速==</strong></h3><p>$$<br>x_{k+1}=\varphi \left( x_k \right)<br>$$</p>
+<p>$$<br>x_{k+1}=\varphi \left( x_k \right)<br>$$</p>
+<p>$$<br>x_{k+1}=\varphi \left( x_k \right)<br>$$</p>
+<p>$$<br>x_{k+1}=\varphi \left( x_k \right)<br>$$</p>
+<p>$$<br>\text{令}\left{ \begin{array}{l}<br>    \bar{x}<em>{k+1}=\varphi \left( x_k \right)\<br>    \tilde{x}_{k+1}=\varphi \left( \bar{x}</em>{k+1} \right)\<br>    x_{k+1}=\tilde{x}<em>{k+1}-\frac{\left( \tilde{x}</em>{k+1}-\bar{x}<em>{k+1} \right) ^2}{\tilde{x}</em>{k+1}-2\bar{x}_{k+1}+x_k}\<br>\end{array} \right.<br>$$</p>
+<p>以上就是Aitken加速法，其可以将一个发散的过程改造成收敛的。</p>
+<hr>
+<h3 id="线性方程组解法"><a href="#线性方程组解法" class="headerlink" title="==线性方程组解法=="></a>==线性方程组解法==</h3><h5 id="雅可比迭代法"><a href="#雅可比迭代法" class="headerlink" title="雅可比迭代法"></a>雅可比迭代法</h5><p>将线性方程组表达为Ax=b</p>
+<p>将A分解为 U + D + L<br>$$<br>x^{\left( k+1 \right)}=-D^{-1}\left( U+L \right) x^{\left( k \right)}+D^{-1}b<br>$$<br>上式即为雅可比迭代公式</p>
+<hr>
+<h5 id="G-S迭代法"><a href="#G-S迭代法" class="headerlink" title="G-S迭代法"></a>G-S迭代法</h5><p>将Ax=b 中的A分解为U + D + L<br>$$<br>x^{\left( k+1 \right)}=-\left( D+L \right) ^{-1}Ux^{\left( k \right)}+\left( D+L \right) ^{-1}b<br>$$<br>简化为：$x^{\left( k+1 \right)}=Bx^{\left( k \right)}+f$</p>
+<p>上式即为G-S迭代公式</p>
+<hr>
+<h4 id="迭代过程的收敛性"><a href="#迭代过程的收敛性" class="headerlink" title="迭代过程的收敛性"></a>迭代过程的收敛性</h4><p>1、对于Ax=b，如果 A 矩阵对角线上的元素大于同行其他元素绝对值之和，则A是对角占优阵，则这个方程用雅可比迭代法和G-S迭代法都收敛。</p>
+<p>2、计算B的特征值，det(λE-B) ，如果|λ|&lt; 1，则谱半径ρ(B)&lt;1，可得迭代公式对任意初始值都是收敛的。</p>
+<hr>
+<h4 id="高斯列主元消去"><a href="#高斯列主元消去" class="headerlink" title="高斯列主元消去"></a>高斯列主元消去</h4><p>注意保持每行第一个非零数绝对值是这一列的最大者<br>$$<br>\left( A\vdots b \right) =\left[ \begin{matrix}{}<br>    1&amp;        2\<br>    2&amp;        2\<br>\end{matrix}\vdots \begin{array}{c}<br>    4\<br>    5\<br>\end{array} \right] \longrightarrow \left[ \begin{matrix}<br>    2&amp;        2\<br>    1&amp;        2\<br>\end{matrix}\vdots \begin{array}{c}<br>    5\<br>    4\<br>\end{array} \right] m_{21}=0.5<br>$$<br>如上，确保每行第一个元素都是这列最大的。</p>
+<p>之后进行：l<del>2</del> = l<del>2</del>- m<del>21</del>l<del>1</del>即可</p>
+<hr>
+<h4 id="三角分解法"><a href="#三角分解法" class="headerlink" title="三角分解法"></a>三角分解法</h4><p>对于Ax=b</p>
+<p>①将A 分解为A=LU<br>$$<br>L=\left[ \begin{matrix}{l}<br>    1&amp;        &amp;        &amp;        \<br>    l_{21}&amp;        1&amp;        &amp;        \<br>    \vdots&amp;        \vdots&amp;        \ddots&amp;        \<br>    l_{n1}&amp;        l_{n2}&amp;        l_{n3}&amp;        1\<br>\end{matrix} \right] U=\left[ \begin{matrix}{l}<br>    u_{11}&amp;        u_{12}&amp;        \cdots&amp;        u_{1n}\<br>    &amp;        u_{22}&amp;        \cdots&amp;        u_{2n}\<br>    &amp;        &amp;        \ddots&amp;        \vdots\<br>    &amp;        &amp;        &amp;        u_{nn}\<br>\end{matrix} \right]<br>$$<br>②LY=B</p>
+<p>③UX=Y</p>
+<p>完成上面三步即可算出X。</p>
+<hr>
+<h3 id="插值与拟合"><a href="#插值与拟合" class="headerlink" title="==插值与拟合=="></a>==插值与拟合==</h3><h4 id="Lagrange插值"><a href="#Lagrange插值" class="headerlink" title="Lagrange插值"></a>Lagrange插值</h4><p>$$<br>L_n\left( x \right) =\sum_{i=0}^n{y_il_i\left( x \right)}=\sum_{i=0}^n{\left( \prod_{j=0,j\ne i}^n{\frac{x-x_j}{x_i-x_j}} \right)}<br>$$</p>
+<p>其中</p>
+<p>$\prod$ 是指连乘。</p>
+<p>l<del>i</del>(x)就是Lagrange插值基函数。<br>$$<br>l_i\left( x \right) =\frac{\left( x-x_0 \right) \left( x-x_1 \right) …\left( x-x_{i-1} \right) \left( x-x_{i+1} \right) …\left( x-x_n \right)}{\left( x_i-x_0 \right) \left( x_i-x_1 \right) …\left( x_i-x_{i-1} \right) \left( x_i-x_{i+1} \right) …\left( x_i-x_n \right)}<br>$$</p>
+<hr>
+<h4 id="Hermite分段三次插值"><a href="#Hermite分段三次插值" class="headerlink" title="Hermite分段三次插值"></a>Hermite分段三次插值</h4><p>考试时只需要会两个点的就行<br>$$<br>S_3\left( x \right) =\underset{k=0}{\overset{n}{\sum{\left[ y_k\alpha <em>k\left( x \right) +y</em>{k}^{‘}\beta _k\left( x \right) \right]}}}\text{，其中}<br>$$</p>
+<p>$$<br>\alpha <em>k\left( x \right) =\left( \frac{x-x</em>{k+1}}{x_k-x_{k+1}} \right) ^2\left( 1+2\frac{x-x_k}{x_{k+1}-x_k} \right)<br>$$</p>
+<p>$$<br>\beta <em>k\left( x \right) =\left( \frac{x-x</em>{k+1}}{x_{k}-x_{k+1}} \right) ^2\left( x-x_{k} \right)<br>$$</p>
+<hr>
+<h4 id="最小二乘法拟合"><a href="#最小二乘法拟合" class="headerlink" title="最小二乘法拟合"></a>最小二乘法拟合</h4><p>给出了一组数据</p>
+<p>设拟合曲线为 y=a+bx ( 或者y=a+bx^2^ )</p>
+<p>这里n =点的个数减一( 因为从 0 到 n )，m=1( y=a+bx只有两项，所以m=1；如果是y=a+bx+cx^2^则m2，但是考试只可能是m=1)</p>
+<p>φ<del>0</del>(x)=1，φ<del>1</del>(x)=‘b后面的’</p>
+<p>之后列出：(φ<del>0</del>,φ<del>0</del>)=$\sum_{i=0}^n{\varphi _0\left( x_i \right) \varphi _0\left( x_i \right)}$</p>
+<p>(φ<del>0</del>,φ<del>1</del>)(φ<del>1</del>,φ<del>0</del>)(φ<del>1</del>,φ<del>1</del>)以此类推</p>
+<p>计算d<del>0</del>=$\sum_{i=0}^n{y_i\varphi _0\left( x_i \right)}$</p>
+<p>​        d<del>1</del>=$\sum_{i=0}^n{y_i\varphi _1\left( x_i \right)}$</p>
+<p>列出正则方程：$$<br>\left{ \begin{array}{l}<br>    \left( \varphi _0,\varphi _0 \right) a+\left( \varphi _0,\varphi _1 \right) b=d_0\<br>    \left( \varphi _1,\varphi _0 \right) a+\left( \varphi _1,\varphi _1 \right) b=d_1\<br>\end{array} \right. $$</p>
+<p>求解得到a,b，带入拟合曲线就得到答案。</p>
+<hr>
+<h3 id="积分计算"><a href="#积分计算" class="headerlink" title="==积分计算=="></a>==积分计算==</h3><h4 id="1、代数精度"><a href="#1、代数精度" class="headerlink" title="1、代数精度"></a>1、代数精度</h4><p>$$<br>\int_a^b{f\left( x \right) dx}\approx \sum_{n=0}^N{A_nf\left( x_n \right)}</p>
+<p>\int_{-1}^1{f\left( x \right) dx}\approx \sum_{n=0}^N{A_nf\left( x_n \right)}<br>$$</p>
+<p>称上式为<strong>机械求积公式</strong>，同时也是略去余项的插值型求积公式</p>
+<p>若一个求积公式对f(x)=x^i^(i=0,1,…,m)能精确成立，但对f(x)=x^m+1^不能精确成立，则该公式具有m次代数精度。</p>
+<p>解题时令f(x)=x^i^(i=0,1,…,m)，这样可以得到m+1个等式，解线性方程组就能得到答案。</p>
+<h4 id="2、Gauss公式"><a href="#2、Gauss公式" class="headerlink" title="2、Gauss公式"></a>2、Gauss公式</h4><p>对于积分为$\int_a^b{f\left( x \right) dx}$需要更改上下限，通过x=$\frac{a+b}{2}-\frac{a-b}{2}t$，做变换。</p>
+<p>确定Gauss公式时，需先确定Gauss点x<del>n</del>，然后再确定系数A<del>n</del>，其中，x<del>n</del>需要构造正交多项式(其根就是x<del>n</del>)</p>
+<p>常用的正交多项式：Legendre</p>
+<p>其通式：<br>$$<br>P_{n+1}\left( x \right) =\frac{(n+1)!}{(2n+2)!}\frac{d^{n+1}}{dx^{n+1}}\left[ \left( x^2-1 \right) ^{n+1} \right] ,n\ge 0<br>$$<br>考试时记住前三个：P<del>0</del>(x)=1，P<del>1</del>(x)=x，P<del>2</del>(x)=x^2^- $\frac{1}{3}$，P<del>3</del>(x)=x^3^- $\frac{3}{5}x$</p>
+<p><strong>P<del>n</del>(x)=0，解就是Gauss点。</strong></p>
+<p>然后算A<del>n</del>，把x<del>n</del>和A<del>n</del>带入Gauss公式就好了</p>
+<h4 id="3、其他求积公式"><a href="#3、其他求积公式" class="headerlink" title="3、其他求积公式"></a>3、其他求积公式</h4><h5 id="矩形积分公式"><a href="#矩形积分公式" class="headerlink" title="矩形积分公式"></a>矩形积分公式</h5><p>$$<br>\int_a^b{f\left( x \right)}dx\approx \left( b-a \right) f\left[ \theta a+\left( 1-\theta \right) b \right] ,\theta \in \left[ 0,1 \right]<br>$$</p>
+<h5 id="梯形公式"><a href="#梯形公式" class="headerlink" title="梯形公式"></a>梯形公式</h5><p>$$<br>\int_a^b{f\left( x \right)}dx\approx \frac{b-a}{2}\left[ f\left( a \right) +f\left( b \right) \right]<br>$$</p>
+<h5 id="Simpson求积公式"><a href="#Simpson求积公式" class="headerlink" title="Simpson求积公式"></a>Simpson求积公式</h5><p>$$<br>\int_a^b{f\left( x \right)}dx\approx \frac{b-a}{6}\left[ f\left( a \right) +4f\left( \frac{a+b}{2} \right) +f\left( b \right) \right]<br>$$</p>
+<hr>
+<h5 id="复合求积公式"><a href="#复合求积公式" class="headerlink" title="复合求积公式"></a>复合求积公式</h5><p>x<del>n</del>=a + nh，h=$\frac{b-a}{N}$</p>
+<ol>
+<li>复合梯形求积公式</li>
+</ol>
+<p>$$<br>\int_a^b{f\left( x \right)}dx\approx \frac{h}{2}\left[ f\left( a \right) +2\sum_{n=1}^{N-1}{f\left( x_n \right) +f\left( b \right)} \right]<br>$$</p>
+<ol start="2">
+<li>复合Simpson公式</li>
+</ol>
+<p>$$<br>\int_a^b{f\left( x \right)}dx\approx \frac{h}{6}\left[ f\left( a \right) +4\sum_{n=0}^{N-1}{f\left( x_{n+\frac{1}{2}} \right) +}2\sum_{n=1}^{N-1}{f\left( x_n \right) +f\left( b \right)} \right]<br>$$</p>
+<p>注意，$x_{n+\frac{1}{2}}=\frac{x_n+x_{n+1}}{2}$</p>
+<hr>
+<h3 id="常微分方程解法"><a href="#常微分方程解法" class="headerlink" title="==常微分方程解法=="></a>==常微分方程解法==</h3><p>对于一阶常微分方程初值问题<br>$$<br>\left{ \begin{array}{l}<br>    \frac{dy}{dt}=f\left( t,y\left( t \right) \right) ,t\in \left[ a,b \right]\<br>    y\left( a \right) =y_0\<br>\end{array} \right.<br>形式如上，题目还会给出步长h。<br>$$<br>注：t<del>n</del> = a + nh (n=0,1,2,…,N)</p>
+<p>f<del>n</del> :f(t<del>n</del> , y<del>n</del>) ≈ y′(t<del>n</del>)</p>
+<p>①显式欧拉法</p>
+<p>y<del>n+1</del> =y<del>n</del> + hf<del>n</del> ;</p>
+<p>②改进欧拉法(梯形法)</p>
+<p>y<del>n+1</del> = y<del>n</del> +$\frac{h}{2}$(f<del>n</del> +f<del>n+1</del>)</p>
+
       
 
       
